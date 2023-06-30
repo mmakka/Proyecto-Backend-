@@ -26,4 +26,4 @@ async function deleteFile(file){
         console.log(err);
     }
 };
-export default {readFile, writeFile, deleteFile};
+export default {readFile, writeFile};

@@ -1,4 +1,5 @@
-import utils from "./utils";
+
+import utils from "./utils.js";
 
 export default class ProductManager {
     constructor(path){
@@ -19,14 +20,13 @@ export default class ProductManager {
     async agregarProduct(tittle ,description ,precio, thumbnail, stock){
     if(tittle == null || description == null || precio == null || thumbnail == null || stock == null){
     console.log ("Debe completar todos los campos")
-    return };
+    return; }
     try{
         let data = await utils.readFile(this.path);
         this.products = data?.length > 0 ? data : [];
     }catch(err){
         console.log(err);
     }
-    
     const product = { 
         tittle ,
         description ,
@@ -39,6 +39,10 @@ export default class ProductManager {
     } else {
     product.id = this.products[this.products.length - 1].id + 1;
     }
+    await utils.writeFile(this.path,this.products);
+    console.log(`Nuevo producto agregado: ${product}`);
+
+
 
     this.products.push(product)
     console.log("Se almaceno el producto");
@@ -55,7 +59,7 @@ getProductById(id) {
     }
     }
 
-//export default {ProductManager};
+
 
 
 
